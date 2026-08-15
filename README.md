@@ -6,7 +6,7 @@ Full reproduction of **HF2-VAD** (ICCV 2021, [arXiv:2108.06852](https://arxiv.or
 
 | Dataset | Paper | Official-weights eval (our pipeline) | From-scratch (finetuned) |
 |---|---|---|---|
-| UCSD Ped2 | 99.3 | **99.52** | 97.69 – 98.67 (3 runs) |
+| UCSD Ped2 | 99.3 | **99.52** | 97.69 – 98.67 (4 runs) |
 | CUHK Avenue | 91.1 | **90.64** | **91.12** |
 | ShanghaiTech | 76.2 | **76.09** | 75.45 |
 
@@ -14,7 +14,7 @@ All three headline results reproduce within normal no-fixed-seed variance. See [
 
 - **§4–5** Engineering patches for torch 2.5 / sm_90 (FlowNet2 CUDA ops recompile, C++17, numpy ≥1.24 fixes) and the single substantive deviation (Cascade R-CNN → torchvision FasterRCNN-v2 detector, mmdet 2.x cannot run on sm_90).
 - **§11** Ablations reproducing paper Table 1 / Table 2 trends, qualitative figures, and timing.
-- **§13** Controlled data-provenance experiment (2026-08): the widely circulated JPG repack of Ped2 vs. the original UCSD tifs — pixel diff 0.65/255, result diff 0.02 AUC. Also documents that the **finetune stage consistently shows a small *negative* gain on Ped2 (3/3 independent runs)** while helping on Avenue — the paper's stage-3 contribution is dataset-dependent.
+- **§13** Controlled data-provenance experiment (2026-08): the widely circulated JPG repack of Ped2 vs. the original UCSD tifs — pixel diff 0.65/255, result diff 0.02 AUC. Also documents that the **finetune stage consistently shows a small *negative* gain on Ped2 (4/4 independent runs)** while helping on Avenue — the paper's stage-3 contribution is dataset-dependent.
 
 ## Repo layout
 
