@@ -7,14 +7,14 @@ Full reproduction of **HF2-VAD** (ICCV 2021, [arXiv:2108.06852](https://arxiv.or
 | Dataset | Paper | Official-weights eval (our pipeline) | From-scratch (finetuned) |
 |---|---|---|---|
 | UCSD Ped2 | 99.3 | **99.52** | 97.69 – 98.67 (4 runs) |
-| CUHK Avenue | 91.1 | **90.64** | **91.12** |
-| ShanghaiTech | 76.2 | **76.09** | 75.45 |
+| CUHK Avenue | 91.1 | **90.64** (90.63 on author pack) | **91.12** (90.81 author-pack, seed 2021) |
+| ShanghaiTech | 76.2 | **76.09** (76.10 on author pack) | 75.45 – **76.59** (author-pack run beats paper) |
 
 All three headline results reproduce within normal no-fixed-seed variance. See [REPRODUCTION_REPORT.md](REPRODUCTION_REPORT.md) for the full report, including:
 
 - **§4–5** Engineering patches for torch 2.5 / sm_90 (FlowNet2 CUDA ops recompile, C++17, numpy ≥1.24 fixes) and the single substantive deviation (Cascade R-CNN → torchvision FasterRCNN-v2 detector, mmdet 2.x cannot run on sm_90).
 - **§11** Ablations reproducing paper Table 1 / Table 2 trends, qualitative figures, and timing.
-- **§13** Controlled data-provenance experiment (2026-08): the widely circulated JPG repack of Ped2 vs. the original UCSD tifs — pixel diff 0.65/255, result diff 0.02 AUC. Also documents that the **finetune stage consistently shows a small *negative* gain on Ped2 (4/4 independent runs)** while helping on Avenue — the paper's stage-3 contribution is dataset-dependent.
+- **§13–14** Controlled data-provenance experiments (2026-08) on all three datasets: circulated/author repacks vs our self-built data — official-weights eval differs by ≤0.02 AUC everywhere. §13: the widely circulated JPG repack of Ped2 vs. the original UCSD tifs — pixel diff 0.65/255, result diff 0.02 AUC. Also documents that the **finetune stage consistently shows a small *negative* gain on Ped2 (4/4 independent runs)** while helping on Avenue — the paper's stage-3 contribution is dataset-dependent.
 
 ## Repo layout
 
